@@ -1,0 +1,46 @@
+[{
+	rightHand: {
+		singleTupping: {
+		[],
+		[]
+		},
+		singleArrows: {
+		[],
+		[]
+		},
+		dualTask: {
+		[],
+		[]
+		},
+		tappingEnfsisDualTask:	{
+		[],
+		[]
+		},
+		ArrowEnfasisDualTask: {
+		[],
+		[]
+		}
+	},
+	leftHand: {
+		singleTupping: {
+		[],
+		[]
+		},
+		singleArrows: {
+		[],
+		[]
+		},
+		dualTask: {
+		[],
+		[]
+		},
+		tappingEnfsisDualTask:	{
+		[],
+		[]
+		},
+		ArrowEnfasisDualTask: {
+		[],
+		[]
+		}
+	},
+}]
