@@ -3,17 +3,15 @@
 import json
 
 def loadData(filePath):
-  print "cargango archivos"
-  fileData = open(filePath, 'r')
-  data = json.loads(fileData.read())
-  return data
+  with open(filePath, 'r') as fileData:
+  	data = json.loads(fileData.read())
+  	return data
 
 def addMetric(filePath, metric):
   data = loadData(filePath)
-  print "agregando nueva metrica"
   data.append(metric)
-  fileData = open(filePath, 'w')
-  fileData.write(json.dumps(data))
+  with open(filePath, 'w') as fileData:
+  	fileData.write(json.dumps(data))
 
-addMetric('data.txt', {"partu": 20, "lao": 40})
-print loadData('data.txt')
+addMetric('data2.txt',[1,2,3,4])
+print loadData('data2.txt')
