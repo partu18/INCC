@@ -1,28 +1,55 @@
 #!/usr/bin/env python
-  
 import pickle
 import os
 
-def loadData(filePath):
+
+
+def loadMetrics(filePath):
   if os.path.isfile(filePath) != True:
-    with open(filePath, 'w') as fileData:
-      fileData.write("{}")    
+    empty = {}
+    with open(filePath, "wb") as fileData:
+      pickle.dump(empty, fileData)
  
-  with open(filePath, 'r') as fileData:
-  	data = pickle.load(fileData.read())
+  with open(filePath, 'rb') as fileData:
+  	data = pickle.load(fileData)
   	return data
 
-def addMetric(id, filePath, metric):
-  data = loadData(filePath)
+def addMetric(id, metric, filePath):
+  data = loadMetrics(filePath)
   ids = data.keys()
-  print ids
+
   if id in ids:
     newId = max(ids) + 1
-    print "El id actual " + id + " ya fue utilizado. Se guardara con el id " + newId
+    print "El id actual " + str(id) + " ya fue utilizado. Se guardara con el id " + str(newId)
   else: 
     newId = id 
 
   data[newId] = metric
-  with open(filePath, 'w') as fileData:
-  	fileData.write(pickle.dump(data))
+  with open(filePath, 'wb') as fileData:
+  	pickle.dump(data, fileData)
 
+def closestOne(timeStamp, obtainedTime):
+
+  x = -1
+  for i in obtainedTime
+
+def cleanSequence(stimTimes, obtainedTime):
+  result = []
+
+  for i in stimTimes:
+    result.append(closestOne(i, obtainedTime))
+
+  return result
+
+
+def cleanMetric(metric):
+  
+  print "rightHand"
+  print "single Tapping"
+
+  stimTimes = metric.rightHand.singleTapping[0]
+  obtainedTime = metric.rightHand.singleTapping[1]
+
+  clenaObtainedTime clanSequence(stimTimes, obtainedTime)
+
+  metric.rightHand.singleTapping[1] = clenaObtainedTime
