@@ -13,5 +13,3 @@ def addMetric(filePath, metric):
   with open(filePath, 'w') as fileData:
   	fileData.write(json.dumps(data))
 
-addMetric('data2.txt',[1,2,3,4])
-print loadData('data2.txt')
