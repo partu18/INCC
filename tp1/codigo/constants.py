@@ -15,4 +15,10 @@ LH_ARROWS_KEYLIST = ['a','d']
 RH_TAPPING_KEYLIST = ['return']
 LH_TAPPING_KEYLIST = ['space']
 NORM_DUAL_KEYLIST = ['space','left','right']
-SPEC_DUAL_KEYLIST = ['return','a','d']
+INV_DUAL_KEYLIST = ['return','a','d']
+
+
+
+
+
+
