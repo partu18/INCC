@@ -1,4 +1,5 @@
 #!/usr/bin/env/python
+# coding=utf-8
 from psychopy import visual, core, event  # import some libraries from PsychoPy
 from saveData import addMetric, loadData
 from constants import *
@@ -31,7 +32,7 @@ def arrow_exp(win,hand='r'):
                 #Vemos cuando fueron apretadas las teclas
                 
         user_times = event.getKeys(keyList=keylist, timeStamped = True)
-        addMetric(result_path, (stim_times, user_times))
+        #addMetric(result_path, (stim_times, user_times))
 
 
 def tapping_exp(win,hand='r'):
@@ -61,7 +62,7 @@ def tapping_exp(win,hand='r'):
 
         #Vemos cuando fueron apretadas las teclas        
         user_times = event.getKeys(keyList=LH_TAPPING_KEYLIST, timeStamped = True)
-        addMetric(result_path, (stim_times, user_times))
+        #addMetric(result_path, (stim_times, user_times))
 
 
 def dual_exp(win,inverted=False):
@@ -128,4 +129,33 @@ def dual_exp(win,inverted=False):
                 #    event.clearEvents()
                 
         user_times = event.getKeys(keyList=NORM_DUAL_KEYLIST, timeStamped = True)
-        addMetric(result_path, (stim_times, user_times))
+        #addMetric(result_path, (stim_times, user_times))
+
+
+
+def writeMessage(win, message):
+        text = visual.TextStim(win,text = message, color='black')
+        text.draw()
+        win.flip()
+
+def say321(win):
+    writeMessage(win,"3")
+    core.wait(1)
+    writeMessage(win,"2")
+    core.wait(1)
+    writeMessage(win,"1")
+    core.wait(1)
+    win.flip()
+    core.wait(1)
+
+
+def expStarts(win):
+    writeMessage(win,u"Presioná Enter para comenzar con el experimento")
+    event.waitKeys(keyList=['return'])
+    say321(win)
+
+def expEnds(win):
+    core.wait(1)
+    writeMessage(win,"Finalizado!")
+    core.wait(3)
+
