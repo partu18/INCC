@@ -7,11 +7,11 @@ from constants import *
 #Constants
 duration_time = 0.1
 interval_time = 0.4
-repetition_times = 15
+repetition_times = 17/interval_time
 
 
 #create a window
-mywin = visual.Window([1200,700], monitor="testMonitor", units="deg", color=(255,255,255), colorSpace='rgb255')
+mywin = visual.Window(fullscr = True,  monitor="testMonitor", units="deg", color=(255,255,255), colorSpace='rgb255')
 
 #create some stimuli
 circle = visual.ImageStim(win=mywin, image=circle_image_path, pos=(0.0,0.0))
@@ -20,7 +20,7 @@ circle = visual.ImageStim(win=mywin, image=circle_image_path, pos=(0.0,0.0))
 
 #draw the stimuli and update the window
 stim_times = []
-for i in range(repetition_times):
+for i in range(int(repetition_times)):
         #Escribimos el circulo 
         circle.draw()
         #Enviamos la pantalla con el circulo

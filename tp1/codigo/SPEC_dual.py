@@ -5,28 +5,27 @@ from saveData import addMetric, loadData
 from constants import * 
 
 #Constants
-duration_time = 0.1
-repetion_times = 15
+duration_time = 0.2
+interval_time = 0.5
+repetition_times = 30/interval_time
 
 
 #create a window
-mywin = visual.Window([1200,700], monitor="testMonitor", units="deg", color=(255,255,255), colorSpace='rgb255')
-#create some stimuli
-circle = visual.ImageStim(win=mywin, image=circle_image_path, pos=(10,0.0))
-arrow = visual.ImageStim(win=mywin, image=arrow_image_path, pos=(-10,0.0))
+mywin = visual.Window(fullscr = True,  monitor="testMonitor", units="deg", color=(255,255,255), colorSpace='rgb255')#create some stimuli
+circle = visual.ImageStim(win=mywin, image=circle_image_path, pos=(2,0.0))
+arrow = visual.ImageStim(win=mywin, image=arrow_image_path, pos=(-2,0.0))
 line = visual.ImageStim(win=mywin, image=line_image_path, pos=(0.0,0.0))
 
-circleTime = 0.5
-arrowTime = 0.71
+circleTime = 0.9
+arrowTime = 0.6
 circleLeftTime = circleTime
 arrowLeftTime = arrowTime
-interval_time = 0.5
 next = 'circle'
 current = next
 
 #draw the stimuli and update the window
 stim_times = []
-for i in range(repetion_times):
+for i in range(int(repetition_times)):
         #Escribimos el circulo
         current = next
         if (next == 'circle'):
