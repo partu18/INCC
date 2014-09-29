@@ -1,59 +1,59 @@
 {	
   id: {
-    rightHand: {
-      singleTapping: {
-      [],
-      []
+    RH: {
+      T: {
+        S: [],
+        M: []
       },
-      singleArrows: {
-      [],
-      []
+      A: {
+        S: [],
+        M: []
       },
-      dualTask: {
-      [],
-      [],
-      [],
-      []
+      D: {
+        TS: [],
+        TM: [],
+        AS: [],
+        AM: []
       },
-      tappingEnfsisDualTask:	{
-      [],
-      [],
-      [],
-      []
+      DT:	{
+        TS: [],
+        TM: [],
+        AS: [],
+        AM: []
       },
-      ArrowEnfasisDualTask: {
-      [],
-      [],
-      [],
-      []
+      DA: {
+        TS: [],
+        TM: [],
+        AS: [],
+        AM: []
       }
     },
-    leftHand: {
-      singleTapping: {
-      [],
-      []
+    LH: {
+      T: {
+        S: [],
+        M: []
       },
-      singleArrows: {
-      [],
-      []
+      A: {
+        S: [],
+        M: []
       },
-      dualTask: {
-      [],
-      [],
-      [],
-      []
+      D: {
+        TS: [],
+        TM: [],
+        AS: [],
+        AM: []
       },
-      tappingEnfsisDualTask:	{
-      [],
-      [],
-      [],
-      []
+      DT:	{
+        TS: [],
+        TM: [],
+        AS: [],
+        AM: []
       },
-      ArrowEnfasisDualTask: {
-      [],
-      [],
-      [],
-      []
+      DA: {
+        TS: [],
+        TM: [],
+        AS: [],
+        AM: []
       }
     },
   }

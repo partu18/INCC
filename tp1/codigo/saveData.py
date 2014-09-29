@@ -2,6 +2,8 @@
 import pickle
 import os
 
+WINDOWS = [0.1, 0.9]
+
 
 
 def loadMetrics(filePath):
@@ -28,28 +30,60 @@ def addMetric(id, metric, filePath):
   with open(filePath, 'wb') as fileData:
   	pickle.dump(data, fileData)
 
-def closestOne(timeStamp, obtainedTime):
+def firstValidMesure(timeStamp, obtainedTime):
 
+  obtainedTime.sort()
   x = -1
-  for i in obtainedTime
+  for i in obtainedTime:
+    if i >= timeStamp + WINDOWS[1]:
+      break
+    else:
+      if i >= (timeStamp - WINDOWS[0]):
+        x = i
+        break
+
+  return x
 
 def cleanSequence(stimTimes, obtainedTime):
   result = []
 
   for i in stimTimes:
-    result.append(closestOne(i, obtainedTime))
+    result.append(firstValidMesure(i, obtainedTime))
 
   return result
 
 
-def cleanMetric(metric):
+def cleanMetric(metrics):
   
-  print "rightHand"
-  print "single Tapping"
+  rhMetrics = metrics["RH"]
+  lhMetrics = metrics["LH"]
+  
+  hands = [rhMetrics, lhMetrics]
+  
+  for metr in hands:
 
-  stimTimes = metric.rightHand.singleTapping[0]
-  obtainedTime = metric.rightHand.singleTapping[1]
+    cleanObtainedTime = cleanSequence(metr["T"]["S"], metr["T"]["M"])
+    metr["T"]["M"] = cleanObtainedTime
 
-  clenaObtainedTime clanSequence(stimTimes, obtainedTime)
+    cleanObtainedTime = cleanSequence(metr["A"]["S"], metr["A"]["M"])
+    metr["A"]["M"] = cleanObtainedTime
 
-  metric.rightHand.singleTapping[1] = clenaObtainedTime
+    cleanObtainedTime = cleanSequence(metr["D"]["TS"], metr["D"]["TM"])
+    metr["D"]["TM"] = cleanObtainedTime
+
+    cleanObtainedTime = cleanSequence(metr["D"]["AS"], metr["D"]["AM"])
+    metr["D"]["AM"] = cleanObtainedTime
+
+    cleanObtainedTime = cleanSequence(metr["DT"]["TS"], metr["DT"]["TM"])
+    metr["DT"]["TM"] = cleanObtainedTime
+
+    cleanObtainedTime = cleanSequence(metr["DT"]["AS"], metr["DT"]["AM"])
+    metr["DT"]["AM"] = cleanObtainedTime
+
+    cleanObtainedTime = cleanSequence(metr["DA"]["TS"], metr["DA"]["TM"])
+    metr["DA"]["TM"] = cleanObtainedTime
+
+    cleanObtainedTime = cleanSequence(metr["DA"]["AS"], metr["DA"]["AM"])
+    metr["DA"]["AM"] = cleanObtainedTime
+
+  return metrics
