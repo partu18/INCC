@@ -82,13 +82,12 @@ def dual_exp(win, randid ,inverted=False):
 
         circleLeftTime = DU_circleTime
         arrowLeftTime = DU_arrowTime
+        circleDurLeftTime = -1
+        arrowDurLeftTime = -1
+        usedTime = 0
     
-        next = "arrow" if DU_arrowTime < DU_circleTime else "circle"
         interval_time = min(DU_arrowTime, DU_circleTime)
 
-        print next
-        current = next
-        
         #For preparation
         line.draw()
         win.flip()
@@ -97,45 +96,41 @@ def dual_exp(win, randid ,inverted=False):
 
 
         #draw the stimuli and update the window
-        stim_times = []
-        core.wait(interval_time)
+        circle_stim_times = []
+        arrow_stim_times = []
         for i in range(int(DU_repetition_times)):
-                #Escribimos el circulo
-                current = next
-                if (next == 'circle'):
-                    arrowLeftTime -= circleLeftTime
-                    circleLeftTime = DU_circleTime
-                    circle.draw()
-                else:
-                    circleLeftTime -= arrowLeftTime
-                    arrowLeftTime = DU_arrowTime
-                    arrow.size*= -1 #(hack ;) ) 
-                    arrow.draw()
+            core.wait(interval_time)
+            circleLeftTime -= interval_time
+            arrowLeftTime -= interval_time
+            circleDurLeftTime -= interval_time
+            arrowDurLeftTime -= interval_time
 
+            # configuramos los duration times
+            if circleLeftTime == 0:
+                circle_stim_times.append(core.getTime())
+                circleDurLeftTime = DU_duration_time
+                
+            if arrowLeftTime == 0:
+                arrow_stim_times.append(core.getTime())
+                arrowDurLeftTime = DU_duration_time
+            
+            # mostramos los que esten con duration time positivos  
+            if circleDurLeftTime > 0:
+                circleLeftTime = DU_circleTime
+                circle.draw()
 
-                if (circleLeftTime < arrowLeftTime):
-                    next = 'circle'
-                    interval_time = circleLeftTime
-                else:
-                    next = 'arrow'
-                    interval_time = arrowLeftTime
+            if arrowDurLeftTime > 0:
+                arrowLeftTime = DU_arrowTime
+                arrow.size*= -1 #(hack ;) ) 
+                arrow.draw()
 
-                line.draw()
-                #Enviamos la pantalla con el circulo
-                win.flip()
-                #Tomamos el tiempo en el que fue enviado
-                stim_times.append((current, core.getTime()))
-                #Lo mostramos por "duration_time" segundos
-                core.wait(DU_duration_time)
-                circleLeftTime -= DU_duration_time
-                arrowLeftTime -= DU_duration_time
-                interval_time -= DU_duration_time
-                #Mandamos pantalla en blanco
-                line.draw()
-                win.flip()
-                #Mostramos pantalla en blanco por "interval_time" segundos.
-                core.wait(interval_time)
-                #Vemos cuando fueron apretadas las teclas
+            #dibujamos la linea
+            line.draw()
+
+            # establecemos el proximo intervalo para el wait
+            cdt = circleDurLeftTime if circleDurLeftTime > 0 else max(arrowLeftTime,circleLeftTime,arrowDurLeftTime)
+            adt = arrowDurLeftTime if arrowDurLeftTime > 0 else max(arrowLeftTime,circleLeftTime)
+            interval_time = min(circleLeftTime,arrowLeftTime,cdt,adt)
 
                 
         user_times = event.getKeys(keyList=NORM_DUAL_KEYLIST, timeStamped = True)
