@@ -1,11 +1,13 @@
 #!/usr/bin/env/python
 # coding=utf-8
 from psychopy import visual, core, event  # import some libraries from PsychoPy
-from saveData import addMetric, loadData
+#from saveData import addMetric, loadData
 from constants import *
 from conf import *
 
-def arrow_exp(win,hand='r'):
+
+#experiments
+def arrow_exp(win, randid ,hand='r'):
         if hand == 'l':
                 keylist = LH_ARROWS_KEYLIST
         else:
@@ -34,8 +36,7 @@ def arrow_exp(win,hand='r'):
         user_times = event.getKeys(keyList=keylist, timeStamped = True)
         #addMetric(result_path, (stim_times, user_times))
 
-
-def tapping_exp(win,hand='r'):
+def tapping_exp(win, randid ,hand='r'):
         if hand == 'l': 
                 keylist = LH_TAPPING_KEYLIST
         else:
@@ -64,8 +65,7 @@ def tapping_exp(win,hand='r'):
         user_times = event.getKeys(keyList=LH_TAPPING_KEYLIST, timeStamped = True)
         #addMetric(result_path, (stim_times, user_times))
 
-
-def dual_exp(win,inverted=False):
+def dual_exp(win, randid ,inverted=False):
         if inverted:
                 Keylist = INV_DUAL_KEYLIST
                 circle = visual.ImageStim(win=win, image=circle_image_path, pos=DUN_circle_pos)
@@ -85,6 +85,13 @@ def dual_exp(win,inverted=False):
     
         next = 'circle'
         current = next
+        
+        #For preparation
+        line.draw()
+        win.flip()
+        core.wait(2)
+
+
 
         #draw the stimuli and update the window
         stim_times = []
@@ -133,29 +140,39 @@ def dual_exp(win,inverted=False):
 
 
 
-def writeMessage(win, message):
-        text = visual.TextStim(win,text = message, color='black')
+
+
+
+
+
+
+#Additional functions
+def writeMessage(win, mcode=None, msg=None, height=1):
+        if msg is None:
+            msg = messages[mcode-1]
+        
+        text = visual.TextStim(win,text = msg, color='black', height=height, wrapWidth = 40)
         text.draw()
         win.flip()
 
 def say321(win):
-    writeMessage(win,"3")
+    writeMessage(win,msg = "3", height=10)
     core.wait(1)
-    writeMessage(win,"2")
+    writeMessage(win,msg = "2", height=10)
     core.wait(1)
-    writeMessage(win,"1")
+    writeMessage(win,msg = "1", height=10)
     core.wait(1)
     win.flip()
     core.wait(1)
 
+def expStarts(win, mcode):
 
-def expStarts(win):
-    writeMessage(win,u"Presioná Enter para comenzar con el experimento")
+    writeMessage(win,mcode)
     event.waitKeys(keyList=['return'])
     say321(win)
 
 def expEnds(win):
     core.wait(1)
-    writeMessage(win,"Finalizado!")
+    writeMessage(win,msg=endMessage, height = 3)
     core.wait(3)
 
