@@ -83,7 +83,10 @@ def dual_exp(win, randid ,inverted=False):
         circleLeftTime = DU_circleTime
         arrowLeftTime = DU_arrowTime
     
-        next = 'circle'
+        next = "arrow" if DU_arrowTime < DU_circleTime else "circle"
+        interval_time = min(DU_arrowTime, DU_circleTime)
+
+        print next
         current = next
         
         #For preparation
@@ -95,30 +98,28 @@ def dual_exp(win, randid ,inverted=False):
 
         #draw the stimuli and update the window
         stim_times = []
+        core.wait(interval_time)
         for i in range(int(DU_repetition_times)):
                 #Escribimos el circulo
                 current = next
                 if (next == 'circle'):
                     arrowLeftTime -= circleLeftTime
                     circleLeftTime = DU_circleTime
-                    if (circleLeftTime < arrowLeftTime):
-                        next = 'circle'
-                        interval_time = circleLeftTime
-                    else:
-                        next = 'arrow'
-                        interval_time = arrowLeftTime
                     circle.draw()
                 else:
                     circleLeftTime -= arrowLeftTime
                     arrowLeftTime = DU_arrowTime
-                    if(circleLeftTime < arrowLeftTime):
-                        next = 'circle'
-                        interval_time = circleLeftTime
-                    else:  
-                        next = 'arrow'
-                        interval_time = arrowLeftTime
                     arrow.size*= -1 #(hack ;) ) 
                     arrow.draw()
+
+
+                if (circleLeftTime < arrowLeftTime):
+                    next = 'circle'
+                    interval_time = circleLeftTime
+                else:
+                    next = 'arrow'
+                    interval_time = arrowLeftTime
+
                 line.draw()
                 #Enviamos la pantalla con el circulo
                 win.flip()
@@ -126,22 +127,19 @@ def dual_exp(win, randid ,inverted=False):
                 stim_times.append((current, core.getTime()))
                 #Lo mostramos por "duration_time" segundos
                 core.wait(DU_duration_time)
+                circleLeftTime -= DU_duration_time
+                arrowLeftTime -= DU_duration_time
+                interval_time -= DU_duration_time
                 #Mandamos pantalla en blanco
                 line.draw()
                 win.flip()
                 #Mostramos pantalla en blanco por "interval_time" segundos.
-                core.wait(DU_interval_time)
+                core.wait(interval_time)
                 #Vemos cuando fueron apretadas las teclas
-                #Borramos el buffer
-                #    event.clearEvents()
+
                 
         user_times = event.getKeys(keyList=NORM_DUAL_KEYLIST, timeStamped = True)
-        #addMetric(result_path, (stim_times, user_times))
-
-
-
-
-
+        return stim_times, user_times
 
 
 

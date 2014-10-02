@@ -18,7 +18,7 @@ event.waitKeys(keyList=['return'])
 writeMessage(mywin, msg = presentationMessage)
 event.waitKeys(keyList=['return'])
 
-
+'''
 #Primer experimento
 expStarts(mywin,mcode=1)
 tapping_exp(mywin,randid,'r')
@@ -39,17 +39,18 @@ expEnds(mywin)
 expStarts(mywin,mcode=4)
 arrow_exp(mywin,randid,'r')
 expEnds(mywin)
-
+'''
 #Dual (solo y enfatizado)
-for i in range(3):
+for i in range(1): # ojooooo cambiar por 3
 	expStarts(mywin,mcode=5+i)
-	dual_exp(mywin,randid,False)
+	debug, _ = dual_exp(mywin,randid,False)
+	print debug
 	expEnds(mywin)
-
+	'''
 	expStarts(mywin,mcode=6+i)
 	dual_exp(mywin,randid,True) 
 	expEnds(mywin)
-
+	'''
 writeMessage(mywin, msg = goodbyeMessage(randid))
 event.waitKeys(keyList=['return'])
 

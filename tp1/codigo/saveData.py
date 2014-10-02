@@ -8,27 +8,16 @@ WINDOWS = [0.1, 0.9]
 
 def loadMetrics(filePath):
   if os.path.isfile(filePath) != True:
-    empty = {}
-    with open(filePath, "wb") as fileData:
-      pickle.dump(empty, fileData)
+    return {}
  
   with open(filePath, 'rb') as fileData:
   	data = pickle.load(fileData)
   	return data
 
-def addMetric(id, metric, filePath):
-  data = loadMetrics(filePath)
-  ids = data.keys()
+def addMetric(filePath, metric):
 
-  if id in ids:
-    newId = max(ids) + 1
-    print "El id actual " + str(id) + " ya fue utilizado. Se guardara con el id " + str(newId)
-  else: 
-    newId = id 
-
-  data[newId] = metric
   with open(filePath, 'wb') as fileData:
-  	pickle.dump(data, fileData)
+  	pickle.dump(metric, fileData)
 
 def firstValidMesure(timeStamp, obtainedTime):
 

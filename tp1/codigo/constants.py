@@ -5,7 +5,7 @@ import os
 working_directory = os.getcwd()
 
 #Images path's:
-result_path = working_directory + '/../resultados/result.txt'
+result_path = working_directory + '/../resultados/{}.data'
 circle_image_path = working_directory+'/../imagenes/circle.png'
 arrow_image_path = working_directory+'/../imagenes/arrow.png'
 line_image_path = working_directory+'/../imagenes/line.png'
