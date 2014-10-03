@@ -84,7 +84,6 @@ def dual_exp(win, randid ,inverted=False):
         arrowLeftTime = DU_arrowTime
         circleDurLeftTime = -1
         arrowDurLeftTime = -1
-        usedTime = 0
     
         interval_time = min(DU_arrowTime, DU_circleTime)
 
@@ -99,7 +98,9 @@ def dual_exp(win, randid ,inverted=False):
         circle_stim_times = []
         arrow_stim_times = []
         for i in range(int(DU_repetition_times)):
+            
             core.wait(interval_time)
+            # restamos el tiempo transcurrido
             circleLeftTime -= interval_time
             arrowLeftTime -= interval_time
             circleDurLeftTime -= interval_time
@@ -109,32 +110,35 @@ def dual_exp(win, randid ,inverted=False):
             if circleLeftTime == 0:
                 circle_stim_times.append(core.getTime())
                 circleDurLeftTime = DU_duration_time
+                circleLeftTime = DU_circleTime
                 
             if arrowLeftTime == 0:
                 arrow_stim_times.append(core.getTime())
                 arrowDurLeftTime = DU_duration_time
+                arrowLeftTime = DU_arrowTime
+                arrow.size*= -1 #(hack ;) ) 
             
             # mostramos los que esten con duration time positivos  
             if circleDurLeftTime > 0:
-                circleLeftTime = DU_circleTime
                 circle.draw()
 
             if arrowDurLeftTime > 0:
-                arrowLeftTime = DU_arrowTime
-                arrow.size*= -1 #(hack ;) ) 
                 arrow.draw()
 
             #dibujamos la linea
             line.draw()
 
             # establecemos el proximo intervalo para el wait
-            cdt = circleDurLeftTime if circleDurLeftTime > 0 else max(arrowLeftTime,circleLeftTime,arrowDurLeftTime)
-            adt = arrowDurLeftTime if arrowDurLeftTime > 0 else max(arrowLeftTime,circleLeftTime)
-            interval_time = min(circleLeftTime,arrowLeftTime,cdt,adt)
+            cdlt = circleDurLeftTime if circleDurLeftTime > 0 else max(arrowLeftTime,circleLeftTime,arrowDurLeftTime)
+            adlt = arrowDurLeftTime if arrowDurLeftTime > 0 else max(arrowLeftTime,circleLeftTime,circleDurLeftTime)
+            interval_time = min(circleLeftTime,arrowLeftTime,cdlt,adlt)
 
+            #muestra lo dibujado por pantalla
+            win.flip()  
                 
         user_times = event.getKeys(keyList=NORM_DUAL_KEYLIST, timeStamped = True)
-        return stim_times, user_times
+        print circle_stim_times
+        return circle_stim_times, arrow_stim_times, user_times
 
 
 

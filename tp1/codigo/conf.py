@@ -14,7 +14,7 @@ SA_circle_pos =(0,0)
 #Dual
 DU_duration_time = 0.2
 DU_interval_time = 0.5
-DU_repetition_times = 5/DU_interval_time
+DU_repetition_times = 15/DU_interval_time
 DU_circleTime = 0.9
 DU_arrowTime = 0.6
 DU_line_pos = (0,0) 
