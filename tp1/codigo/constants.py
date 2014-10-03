@@ -4,6 +4,10 @@ import os
 
 working_directory = os.getcwd()
 
+#data structure
+dual_tasks_TF = ["D", "DT", "DA"]
+dual_tasks_AF = ["D", "DA", "DT"]
+
 #Images path's:
 result_path = working_directory + '/../resultados/{}.data'
 circle_image_path = working_directory+'/../imagenes/circle.png'
@@ -137,5 +141,6 @@ message10  = u"Bárbaro!! Hemos llegado a la última tarea.\n"\
 
 
 
-messages = [message1,message2,message3,message4,message5,message6,message7,message8,message9,message10]
+messagesCEF = [message1,message2,message3,message4,message5,message6,message7,message8,message9,message10]
+messagesAEF = [message1,message2,message3,message4,message5,message6,message9,message10,message7,message8]
 

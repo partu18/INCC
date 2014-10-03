@@ -34,7 +34,7 @@ def arrow_exp(win, randid ,hand='r'):
                 #Vemos cuando fueron apretadas las teclas
                 
         user_times = event.getKeys(keyList=keylist, timeStamped = True)
-        #addMetric(result_path, (stim_times, user_times))
+        return stim_times, user_times
 
 def tapping_exp(win, randid ,hand='r'):
         if hand == 'l': 
@@ -62,29 +62,30 @@ def tapping_exp(win, randid ,hand='r'):
                 core.wait(ST_interval_time)
 
         #Vemos cuando fueron apretadas las teclas        
-        user_times = event.getKeys(keyList=LH_TAPPING_KEYLIST, timeStamped = True)
-        #addMetric(result_path, (stim_times, user_times))
+        user_times = event.getKeys(keyList=keylist, timeStamped = True)
+        return stim_times, user_times
 
 def dual_exp(win, randid ,inverted=False):
         if inverted:
-                Keylist = INV_DUAL_KEYLIST
+                circleKeylist = RH_TAPPING_KEYLIST
+                arrowKeylist = LH_ARROWS_KEYLIST
                 circle = visual.ImageStim(win=win, image=circle_image_path, pos=DUN_circle_pos)
                 arrow = visual.ImageStim(win=win, image=arrow_image_path, pos=DUN_arrow_pos)
 
         else:
-                keylist = NORM_DUAL_KEYLIST
+                circleKeylist = LH_TAPPING_KEYLIST
+                arrowKeylist = RH_ARROWS_KEYLIST
                 circle = visual.ImageStim(win=win, image=circle_image_path, pos=DUI_circle_pos)
                 arrow = visual.ImageStim(win=win, image=arrow_image_path, pos=DUI_arrow_pos)
 
         line = visual.ImageStim(win=win, image=line_image_path, pos=DU_line_pos)
 
 
-
+        #departure values
         circleLeftTime = DU_circleTime
         arrowLeftTime = DU_arrowTime
         circleDurLeftTime = -1
         arrowDurLeftTime = -1
-    
         interval_time = min(DU_arrowTime, DU_circleTime)
 
         #For preparation
@@ -97,16 +98,19 @@ def dual_exp(win, randid ,inverted=False):
         #draw the stimuli and update the window
         circle_stim_times = []
         arrow_stim_times = []
-        for i in range(int(DU_repetition_times)):
+        startTime = core.getTime()
+        pasedTime = 0
+        while pasedTime < DU_repetition_times:
             
             core.wait(interval_time)
-            # restamos el tiempo transcurrido
+
+            #substracting pased time
             circleLeftTime -= interval_time
             arrowLeftTime -= interval_time
             circleDurLeftTime -= interval_time
             arrowDurLeftTime -= interval_time
 
-            # configuramos los duration times
+            # duration times configuration
             if circleLeftTime == 0:
                 circle_stim_times.append(core.getTime())
                 circleDurLeftTime = DU_duration_time
@@ -118,33 +122,39 @@ def dual_exp(win, randid ,inverted=False):
                 arrowLeftTime = DU_arrowTime
                 arrow.size*= -1 #(hack ;) ) 
             
-            # mostramos los que esten con duration time positivos  
+            # drawin correct objets 
             if circleDurLeftTime > 0:
                 circle.draw()
 
             if arrowDurLeftTime > 0:
                 arrow.draw()
 
-            #dibujamos la linea
+            #drawing line
             line.draw()
 
-            # establecemos el proximo intervalo para el wait
+            # seting next interval duration
             cdlt = circleDurLeftTime if circleDurLeftTime > 0 else max(arrowLeftTime,circleLeftTime,arrowDurLeftTime)
             adlt = arrowDurLeftTime if arrowDurLeftTime > 0 else max(arrowLeftTime,circleLeftTime,circleDurLeftTime)
             interval_time = min(circleLeftTime,arrowLeftTime,cdlt,adlt)
 
-            #muestra lo dibujado por pantalla
-            win.flip()  
+            pasedTime = core.getTime() - startTime
+            #showing new screen
+            win.flip() 
                 
-        user_times = event.getKeys(keyList=NORM_DUAL_KEYLIST, timeStamped = True)
-        print circle_stim_times
-        return circle_stim_times, arrow_stim_times, user_times
+        user_circle_times = event.getKeys(keyList=circleKeylist, timeStamped = True)
+        user_arrow_times = event.getKeys(keyList=arrowKeylist, timeStamped = True)
+        return circle_stim_times, arrow_stim_times, user_circle_times, user_arrow_times
 
 
 
 
 #Additional functions
 def writeMessage(win, mcode=None, msg=None, height=1):
+        if EO_circle_first:
+        	messages = messagesCEF
+        else:
+        	messages = messagesAEF
+
         if msg is None:
             msg = messages[mcode-1]
         
