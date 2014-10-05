@@ -36,6 +36,7 @@ def arrow_exp(win, randid ,hand='r'):
         user_times = event.getKeys(keyList=keylist, timeStamped = True)
         return stim_times, user_times
 
+
 def tapping_exp(win, randid ,hand='r'):
         if hand == 'l': 
                 keylist = LH_TAPPING_KEYLIST
@@ -64,6 +65,8 @@ def tapping_exp(win, randid ,hand='r'):
         #Vemos cuando fueron apretadas las teclas        
         user_times = event.getKeys(keyList=keylist, timeStamped = True)
         return stim_times, user_times
+
+
 
 def dual_exp(win, randid ,inverted=False):
         if inverted:
@@ -172,8 +175,44 @@ def say321(win):
     win.flip()
     core.wait(1)
 
-def expStarts(win, mcode):
 
+def writeKeysToUse(win,mcode):
+    #Esto está horrible porque está re hardcodeado
+    stim2 = None
+    if mcode == 1: #Enter derecha
+        stim = visual.ImageStim(win=win, image=enter_image_path, pos=(8,-2.5))
+    elif mcode == 2: #Space izquierda
+        stim = visual.ImageStim(win=win, image=space_image_path, pos=(-14,-2.5), size = 8)
+    elif mcode == 3:#arrows derecha
+        stim = visual.ImageStim(win=win, image=arrows_image_path, pos=(8,-4.5))
+    elif mcode == 4:# ad izquierda
+        stim = visual.ImageStim(win=win, image=ad_image_path, pos=(-14,-4), size= 8)
+    elif mcode == 5:#Space izq, arrows derec
+        stim = visual.ImageStim(win=win, image=space_image_path, pos=(-14,-4.5), size = 8)
+        stim2 = visual.ImageStim(win=win, image=arrows_image_path, pos=(8,-3.5))
+    elif mcode == 6:#Enter derecha, ad zq
+        stim = visual.ImageStim(win=win, image=enter_image_path, pos=(8,-2.5))
+        stim2 = visual.ImageStim(win=win, image=ad_image_path,   pos=(-14,-3.5), size= 8)
+    elif mcode == 7:#Space izq, arrows derec
+        stim = visual.ImageStim(win=win, image=space_image_path, pos=(-14,-4.5), size = 8)
+        stim2 = visual.ImageStim(win=win, image=arrows_image_path, pos=(8,-3.5))
+    elif mcode == 8:#Enter derecha, ad zq
+        stim = visual.ImageStim(win=win, image=enter_image_path, pos=(8,-2.5))
+        stim2 = visual.ImageStim(win=win, image=ad_image_path,   pos=(-14,-3.5), size= 8)
+    elif mcode == 9:#Space izq, arrows derec
+        stim = visual.ImageStim(win=win, image=space_image_path, pos=(-14,-4.5), size = 8)
+        stim2 = visual.ImageStim(win=win, image=arrows_image_path, pos=(8,-3.5))
+    elif mcode == 10:#Enter derecha, ad zq
+        stim = visual.ImageStim(win=win, image=enter_image_path, pos=(8,-2.5))
+        stim2 = visual.ImageStim(win=win, image=ad_image_path,   pos=(-14,-3.5), size= 8)
+
+    stim.draw()
+    if stim2:
+        stim2.draw()
+
+
+def expStarts(win, mcode):
+    writeKeysToUse(win,mcode)
     writeMessage(win,mcode)
     event.waitKeys(keyList=['return'])
     say321(win)

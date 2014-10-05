@@ -32,28 +32,28 @@ data["RH"]["T"]["S"] = s
 data["RH"]["T"]["M"] = m
 expEnds(mywin)
 
-#Segundo experimento
+# #Segundo experimento
 expStarts(mywin,mcode=2)
 s, m = tapping_exp(mywin,randid,'l')
 data["LH"]["T"]["S"] = s
 data["LH"]["T"]["M"] = m
 expEnds(mywin)
 
-#Tercer experimento
+# #Tercer experimento
 expStarts(mywin,mcode=3)
 s, m = arrow_exp(mywin,randid,'r')
 data["RH"]["A"]["S"] = s
 data["RH"]["A"]["M"] = m
 expEnds(mywin)
 
-#Cuarto experimento
+# #Cuarto experimento
 expStarts(mywin,mcode=4)
 s, m = arrow_exp(mywin,randid,'l')
 data["LH"]["A"]["S"] = s
 data["LH"]["A"]["M"] = m
 expEnds(mywin)
 
-#Dual (solo y enfatizado)
+# #Dual (solo y enfatizado)
 for i in range(3):
 	expStarts(mywin,mcode=5+2*i)
 	mts, mas, mtm, mam = dual_exp(mywin,randid,False)
@@ -66,7 +66,7 @@ for i in range(3):
 
 	expEnds(mywin)
 
-	expStarts(mywin,mcode=6+2*i)
+ 	expStarts(mywin,mcode=6+2*i)
 	mts, mas, mtm, mam = dual_exp(mywin,randid,True) 
 	
 	# saving data
@@ -77,11 +77,11 @@ for i in range(3):
 
 	expEnds(mywin)
 	
-# saving data in a file 
+#saving data in a file 
 addMetric(result_path.format(str(randid)),data)
 
 writeMessage(mywin, msg = goodbyeMessage(randid))
-event.waitKeys(keyList=['return'])
+event.waitKeys(keyList=['f'])
 
 
 
