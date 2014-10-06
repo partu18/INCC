@@ -49,8 +49,8 @@ startMessage = u"\n ¿Estás listo? Presioná Enter cuando lo estés para comenz
 presentationMessage =   u"Muchas gracias por colaborar para nuestro proyecto.\n\n" \
 						u"El siguiente experimento está compuesto de 5 niveles distintos donde se realizarán distintas tareas, primero con una mano"\
 						u" y luego con la otra. Cada nivel tendrá su explicación previa. El tiempo de duración del experimento es aproximadamente"\
-						u" entre 5 y 8 minutos. Si bien es totalmente anónimo, al finalizar te asignaremos un número. Estaremos dando premios para los que"\
-						u" mejor resultados obtengan, por lo tanto este número será tu identificador. En el caso que aún ganando un premio quieras"\
+						u" entre 5 y 8 minutos. Si bien es totalmente anónimo, al finalizar te asignaremos un número. Sortearemos premios para los que"\
+						u" hayan participado, por lo tanto este número será tu identificador. En el caso que aún ganando un premio quieras"\
 						u" conservar el anonimato, simplemente ignorá nuestro llamado al ganador. \n\n\n" + startMessage
 
 endMessage = u"Finalizado"
