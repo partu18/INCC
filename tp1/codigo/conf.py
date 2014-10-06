@@ -1,19 +1,19 @@
 #Single tapping
 ST_duration_time = 0.1
 ST_interval_time = 0.4
-ST_repetition_times = 15/(ST_interval_time+ST_duration_time)
+ST_repetition_times = 30/(ST_interval_time+ST_duration_time)
 ST_arrow_pos = (0,0)
 
 
 #Single arrow
 SA_duration_time = 0.1
 SA_interval_time = 0.4
-SA_repetition_times = 15/(SA_interval_time+SA_duration_time)
+SA_repetition_times = 30/(SA_interval_time+SA_duration_time)
 SA_circle_pos =(0,0) 
 
 #Dual
 DU_duration_time = 0.2
-DU_repetition_times = 25
+DU_repetition_times = 30
 DU_circleTime = 0.9
 DU_arrowTime = 0.6
 DU_line_pos = (0,0) 
