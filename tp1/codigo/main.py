@@ -70,10 +70,10 @@ for i in range(3):
 	mts, mas, mtm, mam = dual_exp(mywin,randid,True) 
 	
 	# saving data
-	data["RH"][dual_tasks_order[i]]["TS"] = mts
-	data["RH"][dual_tasks_order[i]]["TM"] = mtm
-	data["RH"][dual_tasks_order[i]]["AS"] = mas
-	data["RH"][dual_tasks_order[i]]["AM"] = mam
+	data["LH"][dual_tasks_order[i]]["TS"] = mts
+	data["LH"][dual_tasks_order[i]]["TM"] = mtm
+	data["LH"][dual_tasks_order[i]]["AS"] = mas
+	data["LH"][dual_tasks_order[i]]["AM"] = mam
 
 	expEnds(mywin)
 	
