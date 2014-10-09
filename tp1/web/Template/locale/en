@@ -1,0 +1,10 @@
+language=English
+locale=en
+
+Avioncito.title.text=Welcome!
+Avioncito.title.timeLeft=Game starts in: 
+
+Avioncito.ending.title=Game Over
+Avioncito.ending.score1=You scored 
+Avioncito.ending.score2= Points!
+Avioncito.ending.gameflow=Go to Games

@@ -1,0 +1,10 @@
+language=Español
+locale=es
+
+Avioncito.title.text=Bienvenido a Avioncito
+Avioncito.title.timeLeft=El Juego comienza en: 
+
+Avioncito.ending.title=Fin del juego
+Avioncito.ending.score1=Hiciste 
+Avioncito.ending.score2= Puntos!
+Avioncito.ending.gameflow=Ir a los Juegos

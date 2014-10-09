@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-Type" content="text/html; charset=utf-8"/> 
+        <link rel="shortcut icon" href="resources/favicon.ico">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>MateMarote - Avioncito2.0</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="resources/css/normalize.min.css">
+        <link rel="stylesheet" href="resources/css/bootstrap.css">
+        <link rel="stylesheet" href="resources/css/main.css">
+        <link rel="stylesheet" href="resources/css/jquery-ui.css" />
+        <link rel="stylesheet" href="css/canvas.css" />
+
+        <script src="libs/jquery-2.0.3.js"></script>        
+        <script src="libs/jstorage.js"></script>
+        
+
+        <script>
+            offline = true;
+            function loadJS(id, src) {
+                if (document.getElementById(id) !== null)
+                    return;
+                var js = document.createElement('script');
+                js.id = id;
+                js.async = false;
+                js.src = src;
+                document.getElementsByTagName('head')[0].appendChild(js);
+            }
+            loadGame = function() {
+
+                var canvas = $("#stageCanvas").get(0);
+                var futureMargin = parseInt($("#stageCanvas").css("margin-top"));
+                canvas.width = window.innerWidth - 40;
+                canvas.height = window.innerHeight-futureMargin-40;
+
+                    loadJS('lz-string-1.3.3', 'libs/lz-string-1.3.3.js'); 
+                    loadJS('statusApp', 'temp/statusApp.js');
+                    loadJS('localStorage', 'temp/localStorage.js');
+                    loadJS('languages', 'temp/languages.js');
+                    loadJS('Locale', 'libs/Locale.js'); 
+                    loadJS('Preloader', 'libs/Preloader.js'); 
+                    loadJS('Random', 'libs/Random.js'); 
+                    loadJS('Time', 'libs/Time.js'); 
+                    loadJS('Metrics', 'libs/Metrics-2.0.js'); 
+                    loadJS('Progress', 'libs/Progress-2.0.js'); 
+                    loadJS('MateMarote', 'libs/MateMarote-2.0.js'); 
+                    loadJS('GraphicsExt', 'libs/GraphicsExt.js'); 
+
+                loadJS('preloadjs', 'libs/createjs-2013.09.25.min.js');
+                loadJS('createjs', 'libs/createjs-2013.09.25.min.js');
+                loadJS('soundjs', 'libs/soundjs-NEXT.min.js');
+                /** load GV */
+                loadJS('GlobalVars', 'js/GlobalVars.js');
+                /** load OP*/
+                loadJS('Shape', 'js/Shape.js');
+                loadJS('EventsHandler', 'js/EventsHandler.js');
+                /** load OM*/
+                loadJS('ObjectsManifest', 'js/ObjectsManifest.js');
+                /** load GC*/
+                loadJS('GameConfig', 'js/GameConfig.js');
+                /** load FF*/
+                loadJS('Function', 'js/Functions.js');
+                /** laod MF*/
+                loadJS('Main', 'js/Main.js');
+
+            };
+
+            $(document).ready(loadGame);
+        </script>
+    </head>
+    <body>
+        
+        <div class="main-container">
+            <div id="canvasWrapper" role="main">
+                <canvas id="stageCanvas" width="800" height="600" ></canvas>
+            </div>
+        </div>
+    </body>
+</html>

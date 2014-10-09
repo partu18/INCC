@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game name="Set" version="1.0">
+    <description>Descripcion del Juego</description>
+    <level number="1">
+        <filename>level1</filename>
+        <keyvalue>true</keyvalue>
+    </level>
+    <languages prefix="SET">es,en</languages>
+</game>

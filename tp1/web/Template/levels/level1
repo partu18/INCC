@@ -1,0 +1,71 @@
+#level1
+left_key=65
+right_key=76
+feedback=true
+game_time=30
+time_to_start=5
+max_time=3
+feedback_time=2
+test_level=false
+
+mobileButtons={"rightBtn":{"active":true,"x":0.8,"y":0.8},"leftBtn":{"active":true,"x":0.2,"y":0.8}}
+
+#levelConfig=ad,ad,ad,ad,ai,ai,ad,ad,ad,ad,ai,ai,ad,ad,ai,ad,ai,ai,ad,ad,ad,ai,ai,ai,ad,ad,ad;ad,ad,ad,ad,ai,ai,ad,ad,ad,ad,ai,ai,ad,ad,ai,ad,ai,ai,ad,ad,ad,ai,ai,ai,ad,ad,ad;ad,ad,ad,ad,ai,ai,ad,ad,ad,ad,ai,ai,ad,ad,ai,ad,ai,ai,ad,ad,ad,ai,ai,ai,ad,ad,ad;ad,ad,ad,ad,ai,ai,ad,ad,ad,ad,ai,ai,ad,ad,ai,ad,ai,ai,ad,ad,ad,ai,ai,ai,ad,ad,ad
+#distractorsConfig=1,1,1,2,2,2,1,1,1,2,2,2,3,1,1,1,2,2,2,1,1,1,2,2,2,3,4;1,1,1,2,2,2,1,1,1,2,2,2,3,1,1,1,2,2,2,1,1,1,2,2,2,3,4;1,1,1,2,2,2,1,1,1,2,2,2,3,1,1,1,2,2,2,1,1,1,2,2,2,3,4;1,1,1,2,2,2,1,1,1,2,2,2,3,1,1,1,2,2,2,1,1,1,2,2,2,3,4;1,1,1,2,2,2,1,1,1,2,2,2,3,1,1,1,2,2,2,1,1,1,2,2,2,3,4;
+
+#numero de checkpoints
+checkpoints=2
+
+#trialsX son los trials que tenes que ganar para pasar el checkpoint
+trialsX=4
+
+#trialsY son los trials que tenes que perder para perder el juego
+trialsY=3
+
+#configuracion del checkpoint 1
+checkpoint1=trial1,trial2,trial3,trial4,trial5,trial6,trial7,trial8,trial9,trial10,trial11,trial12
+
+#primer linea de trials comenzas aca, si ganas trial1 pasas a trial2, si perdes pasas a trial5
+trial1={"avioncitoX":200,"avioncitoY":"r","config1":"ad,ad,ad,ad,ad,ad,ad,ad,ad,ad","distX":"r","distY":"200","config2":"1,1,1,1,1,1,1,1,1,1"}
+trial2={"avioncitoX":"r","avioncitoY":"200","config1":"rd,rd,rd,rd,rd,rd,rd,rd,rd,rd","distX":"200","distY":"r","config2":"1,1,1,1,1,1,1,1,1,1"}
+trial3={"avioncitoX":"r","avioncitoY":"200","config1":"ad,ad,ad,ad,ad,ad,ad,ad,ad,ad","distX":"r","distY":"200","config2":"1,1,1,1,1,1,1,1,1,1"}
+trial4={"avioncitoX":200,"avioncitoY":"r","config1":"rd,rd,rd,rd,rd,rd,rd,rd,rd,rd","distX":"200","distY":"r","config2":"1,1,1,1,1,1,1,1,1,1"}
+
+#segunda linea de trials, si peredes una vez terminas aca
+trial5={"avioncitoX":"100,120,130,140,150,160,170,180,190,200","avioncitoY":"10,20,30,40,50,60,70,80,90,100","config1":"ai,ai,ai,ai,ai,ai,ai,ai,ai,ai","distX":"r","distY":"r","config2":",2,2,2,2,2,2,2,2,2,2"}
+trial6={"avioncitoX":"100,120,130,140,150,160,170,180,190,200","avioncitoY":"10,20,30,40,50,60,70,80,90,100","config1":"ai,ai,ai,ai,ai,ai,ai,ai,ai,ai","distX":"r","distY":"r","config2":",2,2,2,2,2,2,2,2,2,2"}
+trial7={"avioncitoX":"100,120,130,140,150,160,170,180,190,200","avioncitoY":"10,20,30,40,50,60,70,80,90,100","config1":"ai,ai,ai,ai,ai,ai,ai,ai,ai,ai","distX":"r","distY":"r","config2":",2,2,2,2,2,2,2,2,2,2"}
+trial8={"avioncitoX":"100,120,130,140,150,160,170,180,190,200","avioncitoY":"10,20,30,40,50,60,70,80,90,100","config1":"ai,ai,ai,ai,ai,ai,ai,ai,ai,ai","distX":"r","distY":"r","config2":",2,2,2,2,2,2,2,2,2,2"}
+
+#ultima linea de trials
+trial9={"avioncitoX":"r","avioncitoY":"r","config1":"ad,ai,ad,ai,ad,ai,ad,ai,ad,ai","distX":"100,120,130,140,150,160,170,180,190,200","distY":"10,20,30,40,50,60,70,80,90,100","config2":"3,3,3,3,3,3,3,3,3,3"}
+trial10={"avioncitoX":"r","avioncitoY":"r","config1":"rd,ai,rd,ai,rd,ai,rd,ai,rd,ai","distX":"100,120,130,140,150,160,170,180,190,200","distY":"10,20,30,40,50,60,70,80,90,100","config2":"3,3,3,3,3,3,3,3,3,3"}
+trial11={"avioncitoX":"r","avioncitoY":"r","config1":"ad,ai,ad,ai,ad,ai,ad,ai,ad,ai","distX":"100,120,130,140,150,160,170,180,190,200","distY":"10,20,30,40,50,60,70,80,90,100","config2":"3,3,3,3,3,3,3,3,3,3"}
+trial12={"avioncitoX":"r","avioncitoY":"r","config1":"rd,ai,rd,ai,rd,ai,rd,ai,rd,ai","distX":"100,120,130,140,150,160,170,180,190,200","distY":"10,20,30,40,50,60,70,80,90,100","config2":"3,3,3,3,3,3,3,3,3,3"}
+
+#configuracion del checkpoint 2
+checkpoint2=trial13,trial14,trial15,trial16,trial17,trial18,trial19,trial20,trial21,trial22,trial23,trial24
+
+#primer linea de trials comenzas aca, si ganas trial1 pasas a trial2, si perdes pasas a trial5
+trial13={"avioncitoX":50,"avioncitoY":"r","config1":"ad,ad,ad,ad,ad,ad,ad,ad,ad,ad","distX":"r","distY":"200","config2":"1,1,1,1,1,1,1,1,1,1"}
+trial14={"avioncitoX":"r","avioncitoY":"50","config1":"rd,rd,rd,rd,rd,rd,rd,rd,rd,rd","distX":"200","distY":"r","config2":"1,1,1,1,1,1,1,1,1,1"}
+trial15={"avioncitoX":"r","avioncitoY":"50","config1":"ad,rd,rd,rd,rd,rd,ad,ad,ad,ad","distX":"r","distY":"200","config2":"1,1,1,1,1,1,1,1,1,1"}
+trial16={"avioncitoX":50,"avioncitoY":"r","config1":"ad,ad,ad,ad,rd,rd,rd,ad,ad,ad","distX":"200","distY":"r","config2":"1,1,1,1,1,1,1,1,1,1"}
+
+#segunda linea de trials, si peredes una vez terminas aca
+trial17={"avioncitoX":"10,20,30,40,50,60,70,80,90,100","avioncitoY":"10,20,30,40,50,60,70,80,90,100","config1":"ai,ai,ai,ai,ai,ai,ai,ai,ai,ai","distX":"r","distY":"r","config2":",2,2,2,2,2,2,2,2,2,2"}
+trial18={"avioncitoX":"10,20,30,40,50,60,70,80,90,100","avioncitoY":"10,20,30,40,50,60,70,80,90,100","config1":"ai,ai,ai,ai,ai,ai,ai,ai,ai,ai","distX":"r","distY":"r","config2":",2,2,2,2,2,2,2,2,2,2"}
+trial19={"avioncitoX":"10,20,30,40,50,60,70,80,90,100","avioncitoY":"10,20,30,40,50,60,70,80,90,100","config1":"ai,ai,ai,ai,ai,ai,ai,ai,ai,ai","distX":"r","distY":"r","config2":",2,2,2,2,2,2,2,2,2,2"}
+trial20={"avioncitoX":"10,20,30,40,50,60,70,80,90,100","avioncitoY":"10,20,30,40,50,60,70,80,90,100","config1":"ai,ai,ai,ai,ai,ai,ai,ai,ai,ai","distX":"r","distY":"r","config2":",2,2,2,2,2,2,2,2,2,2"}
+
+#ultima linea de trials
+trial21={"avioncitoX":"r","avioncitoY":"r","config1":"ad,ai,rd,ai,rd,ai,rd,ai,ad,ai","distX":"10,20,30,40,50,60,70,80,90,100","distY":"10,20,30,40,50,60,70,80,90,100","config2":"3,3,3,3,3,3,3,3,3,3"}
+trial22={"avioncitoX":"r","avioncitoY":"r","config1":"ad,ai,ad,ai,ad,ai,ad,ai,ad,ai","distX":"10,20,30,40,50,60,70,80,90,100","distY":"10,20,30,40,50,60,70,80,90,100","config2":"3,3,3,3,3,3,3,3,3,3"}
+trial23={"avioncitoX":"r","avioncitoY":"r","config1":"ad,ai,rd,ai,rd,ai,rd,ai,ad,ai","distX":"10,20,30,40,50,60,70,80,90,100","distY":"10,20,30,40,50,60,70,80,90,100","config2":"3,3,3,3,3,3,3,3,3,3"}
+trial24={"avioncitoX":"r","avioncitoY":"r","config1":"ad,ai,ad,ai,ad,ai,rd,ai,rd,ai","distX":"10,20,30,40,50,60,70,80,90,100","distY":"10,20,30,40,50,60,70,80,90,100","config2":"3,3,3,3,3,3,3,3,3,3"}
+
+# PRELOADING
+preload_extension=.png
+# separate this json in JSONLint.com for more confort.
+preload={ "folders" :{"checkpoints":"img/checkpoints/", "distractors":"img/distractores/"},"checkpoints": ["1", "2", "3", "4", "5", "6","7","8", "9", "10", "11", "12"],"distractors": ["d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "d10", "d11", "d12", "d13"],"checkpoint_frame": "img/checkpoints/checkpoint_border.png","feedback_positive":"img/giantCheck.png","feedback_negative":"img/wrong.png","background":"img/fondo.png","background_pasto":"img/pasto.png","button":"img/button.png","ending_screen":"img/fin.png","avioncito_spritesheet":"img/AvioncitoAtlas.png","danger_bar":"img/DangerBar.png","starting_screen":"img/inicio.png","heart":"img/heart-icon.png","sound_correct":"sounds/correct.mp3","sound_wrong":"sounds/wrong.mp3","sound_start":"sounds/despegue.mp3","sound_finish":"sounds/choque.mp3","buttonLeft":"img/mobile/arrowLeft.png","buttonRight":"img/mobile/arrowRight.png"}
+
