@@ -7,6 +7,8 @@ function buildGameConfig(/*mainScope*/) {
     tappingTime: 30000,
     arrowTime: 30000,
     dualTime: 30000,
+    fixationTime: 2000,
+    currentTrial: "trial_000",
     trial_000: JSON.stringify({
       type: "D",
       hand: "R",

@@ -48,6 +48,8 @@
         gameObjects.events.addEvent(show.bind(null, gameObjects.circle), i * currentConfig.circleIntervalTime);
         gameObjects.events.addEvent(hidden.bind(null, gameObjects.circle), (i * currentConfig.circleIntervalTime) + currentConfig.circleDurationTime);
       }
+
+      gameObjects.events.addEvent(nextStep, currentConfig.tappingTime + currentConfig.fixationTime);
       break;
     case "A":
       aparitionTimes = (gameData.arrowTime / currentConfig.arrowIntervalTime);
@@ -62,19 +64,21 @@
         gameObjects.events.addEvent(show.bind(null, gameObjects.rightArrow), i * currentConfig.arrowIntervalTime);
         gameObjects.events.addEvent(hidden.bind(null, gameObjects.rightArrow), (i * currentConfig.arrowIntervalTime) + currentConfig.arrowDurationTime);
       }
+
+      gameObjects.events.addEvent(nextStep, currentConfig.arrowTime + currentConfig.fixationTime);
       break;
     case "D":
       
       gameObjects.events.addEvent(show.bind(null, gameObjects.line),0);
 
-      aparitionTimes = (gameData.tappingTime / currentConfig.circleIntervalTime);
+      aparitionTimes = (gameData.dualTime / currentConfig.circleIntervalTime);
 
       for (i = 0; i < aparitionTimes; ++i) {
         gameObjects.events.addEvent(show.bind(null, gameObjects.circle), i * currentConfig.circleIntervalTime);
         gameObjects.events.addEvent(hidden.bind(null, gameObjects.circle), (i * currentConfig.circleIntervalTime) + currentConfig.circleDurationTime);
       }
 
-      aparitionTimes = (gameData.arrowTime / currentConfig.arrowIntervalTime);
+      aparitionTimes = (gameData.dualTime / currentConfig.arrowIntervalTime);
 
 
       for (i = 0; i < aparitionTimes; i += 2) {
@@ -86,8 +90,11 @@
         gameObjects.events.addEvent(show.bind(null, gameObjects.rightArrow), i * currentConfig.arrowIntervalTime);
         gameObjects.events.addEvent(hidden.bind(null, gameObjects.rightArrow), (i * currentConfig.arrowIntervalTime) + currentConfig.arrowDurationTime);
       }
+
+      gameObjects.events.addEvent(nextStep, gameData.dualTime + currentConfig.fixationTime);
       break;
     }
+
 
     addAllToSubStage(objectsManifest, currentConfig);
     stage.update();
@@ -95,16 +102,12 @@
   }
 
   function nextStep() {
+    
   }
 
   function startGame() {
     var currentStatus;
-    //createjs.Ticker.addEventListener("tick", stage);
-    //createjs.Ticker.setFPS(60);
-
-    // Default way to obtain the correct start point, it can be changed.
-    currentStatus = Progress.progress.gameData.notFirstTime ? STATUS.RESUME_GAME : STATUS.DEPARTURE_POINT;
-    currentConfig = Progress.getTrial(Progress.nextTrial(currentStatus));
+    currentConfig = Progress.getTrial(Progress.nextTrial(STATUS.DEPARTURE_POINT));
 
     playTrial();
   }
@@ -132,11 +135,47 @@
 
   Progress.nextTrial = function (status) {
 
-    // used for the default way to obtain the correct start point, it can be changed.
-    // if this default way isn't used this isn't necesary.
-    if (status === STATUS.DEPARTURE_POINT) {
-
-      Progress.progress.gameData.notFirstTime = true;
+    switch (gameData.currentTrial) {
+    case "trial_000":
+      gameData.currentTrial = "trial_001";
+      return gameData.currentTrial;
+      break;
+    case "trial_001":
+      gameData.currentTrial = "trial_002";
+      return gameData.currentTrial;
+      break;
+    case "trial_002":
+      gameData.currentTrial = "trial_003";
+      return gameData.currentTrial;
+      break;
+    case "trial_003":
+      gameData.currentTrial = "trial_004";
+      return gameData.currentTrial;
+      break;
+    case "trial_004":
+      gameData.currentTrial = "trial_005";
+      return gameData.currentTrial;
+      break;
+    case "trial_005":
+      gameData.currentTrial = "trial_006";
+      return gameData.currentTrial;
+      break;
+    case "trial_006":
+      gameData.currentTrial = "trial_007";
+      return gameData.currentTrial;
+      break;
+    case "trial_007":
+      gameData.currentTrial = "trial_008";
+      return gameData.currentTrial;
+      break;
+    case "trial_008":
+      gameData.currentTrial = "trial_009";
+      return gameData.currentTrial;
+      break;
+    case "trial_009":
+      gameData.currentTrial = null;
+      return null;
+      break;
     }
 
     return "trial_000";
