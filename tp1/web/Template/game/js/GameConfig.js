@@ -1,4 +1,4 @@
-/*global */
+/*global stageWidth */
 "use strict";
 
 function buildGameConfig(/*mainScope*/) {
@@ -8,9 +8,9 @@ function buildGameConfig(/*mainScope*/) {
     arrowTime: 30000,
     dualTime: 30000,
     fixationTime: 2000,
-    currentTrial: "trial_000",
+    currentTrial: "none",
     trial_000: JSON.stringify({
-      type: "D",
+      type: "DA",
       hand: "R",
       arrowIntervalTime: 600,
       arrowDurationTime: 200,

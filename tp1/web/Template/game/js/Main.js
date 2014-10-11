@@ -136,6 +136,10 @@
   Progress.nextTrial = function (status) {
 
     switch (gameData.currentTrial) {
+    case "none":
+      gameData.currentTrial = "trial_000";
+      return gameData.currentTrial;
+      break;
     case "trial_000":
       gameData.currentTrial = "trial_001";
       return gameData.currentTrial;

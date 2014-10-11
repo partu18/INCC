@@ -1,5 +1,5 @@
-/*global Shape, EventsHandler*/
-/*global MateMarote, stageWidth, stageHeight */
+/*global Shape, EventsHandler, Text*/
+/*global MateMarote, stageWidth, stageHeight, T_coverMessage */
 "use strict";
 
 function buildObjectManifest(scope) {
@@ -73,6 +73,23 @@ function buildObjectManifest(scope) {
         y: stageHeight * 0.5,
         scaleX: 0.5,
         scaleY: 0.5
+      }
+    },
+    coverMessage: {
+      constructor: Text,
+      zIndex: 2,
+      addToStage: true,
+      parameters: {
+        text: message10,
+        font: "bold 36px Arial",
+        color: "rgba(0,0,0,0.75)",
+        regCentered: true,
+        settings: {
+          scaleX: 0.5,
+          scaleY: 0.5,
+          x: 50,
+          y: stageHeight * 0.5
+        }
       }
     },
     events: {

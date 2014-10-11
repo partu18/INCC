@@ -34,8 +34,8 @@
 
                 var canvas = $("#stageCanvas").get(0);
                 var futureMargin = parseInt($("#stageCanvas").css("margin-top"));
-                canvas.width = window.innerWidth - 40;
-                canvas.height = window.innerHeight-futureMargin-40;
+                canvas.width = window.innerWidth - 5;
+                canvas.height = window.innerHeight - futureMargin - 5;
 
                     loadJS('lz-string-1.3.3', 'libs/lz-string-1.3.3.js'); 
                     loadJS('statusApp', 'temp/statusApp.js');
@@ -58,6 +58,8 @@
                 /** load OP*/
                 loadJS('Shape', 'js/Shape.js');
                 loadJS('EventsHandler', 'js/EventsHandler.js');
+                loadJS('Text', 'js/Text.js');
+                loadJS('constants', 'js/constants.js');
                 /** load OM*/
                 loadJS('ObjectsManifest', 'js/ObjectsManifest.js');
                 /** load GC*/
