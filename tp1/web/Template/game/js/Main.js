@@ -23,6 +23,9 @@
   function finishTrial(status) {
   }
 
+  function nextStep() {
+  }
+
   function playTrial() {
     var i, aparitionTimes;
     Progress.trialPlay();
@@ -68,8 +71,8 @@
       gameObjects.events.addEvent(nextStep, currentConfig.arrowTime + currentConfig.fixationTime);
       break;
     case "D":
-      
-      gameObjects.events.addEvent(show.bind(null, gameObjects.line),0);
+
+      gameObjects.events.addEvent(show.bind(null, gameObjects.line), 0);
 
       aparitionTimes = (gameData.dualTime / currentConfig.circleIntervalTime);
 
@@ -99,10 +102,6 @@
     addAllToSubStage(objectsManifest, currentConfig);
     stage.update();
     gameObjects.events.start();
-  }
-
-  function nextStep() {
-    
   }
 
   function startGame() {
@@ -135,13 +134,14 @@
 
   Progress.nextTrial = function (status) {
     var i;
+    var trials = ["none", "trial_000", "trial_001", "trial_002", "trial_003"];
     var result = null;
-    var length = gameData.trials.length;
+    var length = trials.length;
 
-    for (i = 0; i < (length-1); ++i) {
-      
-      if(gameData.currentTrial === gameData.trials[i]) {
-        result = gameData.trials[i+1];
+    for (i = 0; i < (length - 1); ++i) {
+
+      if (gameData.currentTrial === trials[i]) {
+        result = trials[i + 1];
       }
     }
 
