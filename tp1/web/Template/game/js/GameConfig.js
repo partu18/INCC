@@ -1,29 +1,41 @@
-/*global stageWidth */
+/*global stageWidth, coverMessage */
 "use strict";
 
 function buildGameConfig(/*mainScope*/) {
   return {
-    paramName: "value",
+    continueKey: 13,
+    startKey: 13,
     tappingTime: 30000,
     arrowTime: 30000,
     dualTime: 30000,
     fixationTime: 2000,
     currentTrial: "none",
     trial_000: JSON.stringify({
-      type: "DA",
+      message: {
+        text: coverMessage
+      }
+    }),
+    trial_001: JSON.stringify({
+      type: "D",
       hand: "R",
       arrowIntervalTime: 600,
       arrowDurationTime: 200,
       circleIntervalTime: 900,
       circleDurationTime: 200,
+      message: {
+        text: message1
+      },
       leftArrow: {
         x: stageWidth * 0.5 - 50,
+        visible: false
       },
       rightArrow: {
         x: stageWidth * 0.5 - 50,
+        visible: false
       },
       circle: {
         x: stageWidth * 0.5 + 50,
+        visible: false
       },
       imgMessage: {
         src: "enter"

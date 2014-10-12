@@ -1,12 +1,14 @@
 "use strict";
 /*global gameInit, buildObjects, MateMarote, Progress, addAllToSubStage */
-/*global STATUS, gameObjects, stage, $ */
+/*global STATUS, gameObjects, stage, $, window */
 
 
 (function () {
   var currentConfig;
   var objectsManifest;
   var gameData;
+  var continueKey = false;
+  var startKey = false;
   var myCanvas = $("#stageCanvas").get(0);
 
 
@@ -20,13 +22,23 @@
     MateMarote.synchronize();
   }
 
-  function finishTrial(status) {
+  function finishTrial() {
   }
 
   function nextStep() {
+    console.log("nextStep");
+    currentConfig = Progress.getTrial(Progress.nextTrial());
+
+    buildObjects(objectsManifest, currentConfig);
+    addAllToSubStage(objectsManifest, currentConfig);
+
+    gameObjects.message.visible = true;
+    stage.update();
+    startKey = true;
   }
 
   function playTrial() {
+    console.log("playTrial");
     var i, aparitionTimes;
     Progress.trialPlay();
 
@@ -52,7 +64,7 @@
         gameObjects.events.addEvent(hidden.bind(null, gameObjects.circle), (i * currentConfig.circleIntervalTime) + currentConfig.circleDurationTime);
       }
 
-      gameObjects.events.addEvent(nextStep, currentConfig.tappingTime + currentConfig.fixationTime);
+      gameObjects.events.addEvent(finishTrial, currentConfig.tappingTime + currentConfig.fixationTime);
       break;
     case "A":
       aparitionTimes = (gameData.arrowTime / currentConfig.arrowIntervalTime);
@@ -68,7 +80,7 @@
         gameObjects.events.addEvent(hidden.bind(null, gameObjects.rightArrow), (i * currentConfig.arrowIntervalTime) + currentConfig.arrowDurationTime);
       }
 
-      gameObjects.events.addEvent(nextStep, currentConfig.arrowTime + currentConfig.fixationTime);
+      gameObjects.events.addEvent(finishTrial, currentConfig.arrowTime + currentConfig.fixationTime);
       break;
     case "D":
 
@@ -94,7 +106,7 @@
         gameObjects.events.addEvent(hidden.bind(null, gameObjects.rightArrow), (i * currentConfig.arrowIntervalTime) + currentConfig.arrowDurationTime);
       }
 
-      gameObjects.events.addEvent(nextStep, gameData.dualTime + currentConfig.fixationTime);
+      gameObjects.events.addEvent(finishTrial, gameData.dualTime + currentConfig.fixationTime);
       break;
     }
 
@@ -105,10 +117,16 @@
   }
 
   function startGame() {
-    var currentStatus;
+    debugger;
+
     currentConfig = Progress.getTrial(Progress.nextTrial(STATUS.DEPARTURE_POINT));
 
-    playTrial();
+    buildObjects(objectsManifest, currentConfig);
+    addAllToSubStage(objectsManifest, currentConfig);
+
+    gameObjects.message.visible = true;
+    stage.update();
+    continueKey = true;
   }
 
   var mainScope = {
@@ -132,22 +150,48 @@
   //////////////////////////////////////////////////////////////
 
 
-  Progress.nextTrial = function (status) {
+  Progress.nextTrial = function () {
     var i;
     var trials = ["none", "trial_000", "trial_001", "trial_002", "trial_003"];
     var result = null;
     var length = trials.length;
+    console.log("nextTrial");
 
     for (i = 0; i < (length - 1); ++i) {
 
       if (gameData.currentTrial === trials[i]) {
         result = trials[i + 1];
+        break;
       }
     }
+
+    gameData.currentTrial = result;
 
     return result;
   };
 
+  $(window).keydown(function (e) {
+    var itsContinueKey = (e.keyCode === gameData.continueKey);
+
+    if (continueKey && itsContinueKey) {
+
+      continueKey = false;
+      gameObjects.message.visible = false;
+      nextStep();
+    }
+  });
+
+
+  $(window).keydown(function (e) {
+    var itsStartKey = (e.keyCode === gameData.startKey);
+
+    if (startKey && itsStartKey) {
+
+      startKey = false;
+      gameObjects.message.visible = false;
+      playTrial();
+    }
+  });
 
 
   //////////////////////////////////////////////////////////////

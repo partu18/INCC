@@ -80,7 +80,7 @@ function buildObjectManifest(scope) {
       zIndex: 2,
       addToStage: true,
       parameters: {
-        text: message10,
+        text: null,
         font: "bold 36px Arial",
         color: "rgba(0,0,0,0.75)",
         regCentered: true,

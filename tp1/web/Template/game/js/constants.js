@@ -1,4 +1,4 @@
-var T_coverMessage = "Trabajo Práctico N°1 \nIntroducción a la Neurociencia Congnitiva y Computacional\n\nTema: Dual Task, Tapping.\n\nAlumnos:\nAbrevaya Sofía\nArtuso Pablo\nBelloli Laouen\n\n\n\n\nPressione enter para continuar.";
+var coverMessage = "Trabajo Práctico N°1 \nIntroducción a la Neurociencia Congnitiva y Computacional\n\nTema: Dual Task, Tapping.\n\nAlumnos:\nAbrevaya Sofía\nArtuso Pablo\nBelloli Laouen\n\n\n\n\nPressione enter para continuar.";
 
 var startMessage = "Está pronto? Pressione enter quando estiver para começar\ncom o seguinte experimento.";
 
