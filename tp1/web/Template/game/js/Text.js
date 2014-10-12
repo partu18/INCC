@@ -12,9 +12,7 @@ Text.prototype.textTick = Text.prototype._tick;
 Text.prototype.initialize = function (parameters) {
   // initian settings
   this.textInitialize(parameters.text, parameters.font, parameters.color);
-  if (parameters.hasOwnProperty("settings")) {
-    setProperties(this, parameters.settings);
-  }
+  setProperties(this, parameters);
   var regCentered = parameters.hasOwnProperty("regCentered") ? parameters.regCentered : false;
   if (regCentered) {
     this.regY = this.getBounds().y + (this.getBounds().height * 0.5);

@@ -64,7 +64,6 @@ textarea {
 body {
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
     background-color: #F2F2F2;
-    background-image: url('../img/bg.png');
     background-size: 100%;
     background-attachment:fixed;
     padding: 0;

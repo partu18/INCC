@@ -1,8 +1,8 @@
 /*global Shape, EventsHandler, Text*/
-/*global MateMarote, stageWidth, stageHeight, T_coverMessage */
+/*global MateMarote, stageWidth, stageHeight, T_coverMessage, endMessage */
 "use strict";
 
-function buildObjectManifest(scope) {
+function buildObjectManifest(/*mainScope*/) {
 
   return {
     backdround: {
@@ -13,6 +13,21 @@ function buildObjectManifest(scope) {
         src: "background",
         x: 0,
         y: 0
+      }
+    },
+    line: {
+      constructor: Shape,
+      addToStage: true,
+      zIndex: 1,
+      parameters: {
+        src: "line",
+        visible: false,
+        regX: 5,
+        regY: 300,
+        x: stageWidth * 0.5,
+        y: stageHeight * 0.5,
+        scaleX: 0.5,
+        scaleY: 0.5
       }
     },
     circle: {
@@ -60,47 +75,64 @@ function buildObjectManifest(scope) {
         scaleY: 0.35
       }
     },
-    line: {
-      constructor: Shape,
-      addToStage: true,
-      zIndex: 1,
-      parameters: {
-        src: "line",
-        visible: false,
-        regX: 5,
-        regY: 300,
-        x: stageWidth * 0.5,
-        y: stageHeight * 0.5,
-        scaleX: 0.5,
-        scaleY: 0.5
-      }
-    },
-    message: {
+    instructions: {
       constructor: Text,
       zIndex: 2,
       addToStage: true,
       parameters: {
-        text: null,
+        text: "a",
         font: "bold 36px Arial",
-        color: "rgba(0,0,0,0.75)",
+        color: "rgba(0,0,0,1)",
         regCentered: true,
-        settings: {
-          scaleX: 0.5,
-          scaleY: 0.5,
-          x: 50,
-          y: stageHeight * 0.5
-        }
+        visible: false,
+        scaleX: 0.5,
+        scaleY: 0.5,
+        x: 50,
+        y: stageHeight * 0.5
       }
     },
-    imgMessage: {
+    endText: {
+      constructor: Text,
+      zIndex: 2,
+      addToStage: true,
+      parameters: {
+        text: endMessage,
+        font: "bold 36px Arial",
+        color: "rgba(0,0,0,1)",
+        regCentered: true,
+        visible: false,
+        scaleX: 0.5,
+        scaleY: 0.5,
+        x: stageWidth * 0.5,
+        y: stageHeight * 0.5
+      }
+    },
+    image: {
       constructor: Shape,
       addToStage: true,
       zIndex: 2,
       parameters: {
+        visible: false,
         scaleX: 0.5,
         scaleY: 0.5,
         x: 50,
         y: 300
+      }
+    },
+    countDown: {
+      constructor: Text,
+      zIndex: 2,
+      addToStage: true,
+      parameters: {
+        text: "3",
+        font: "bold 36px Arial",
+        color: "rgba(0,0,0,1)",
+        regCentered: true,
+        visible: false,
+        scaleX: 2.5,
+        scaleY: 2.5,
+        x: stageWidth * 0.5,
+        y: stageHeight * 0.5
       }
     },
     events: {
@@ -114,5 +146,6 @@ function buildObjectManifest(scope) {
 
 var objectConstructors = {
   Shape: Shape,
-  EventsHandler: EventsHandler
+  EventsHandler: EventsHandler,
+  Text: Text,
 };
