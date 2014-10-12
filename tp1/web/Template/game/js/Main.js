@@ -134,56 +134,21 @@
 
 
   Progress.nextTrial = function (status) {
+    var i;
+    var result = null;
+    var length = gameData.trials.length;
 
-    switch (gameData.currentTrial) {
-    case "none":
-      gameData.currentTrial = "trial_000";
-      return gameData.currentTrial;
-      break;
-    case "trial_000":
-      gameData.currentTrial = "trial_001";
-      return gameData.currentTrial;
-      break;
-    case "trial_001":
-      gameData.currentTrial = "trial_002";
-      return gameData.currentTrial;
-      break;
-    case "trial_002":
-      gameData.currentTrial = "trial_003";
-      return gameData.currentTrial;
-      break;
-    case "trial_003":
-      gameData.currentTrial = "trial_004";
-      return gameData.currentTrial;
-      break;
-    case "trial_004":
-      gameData.currentTrial = "trial_005";
-      return gameData.currentTrial;
-      break;
-    case "trial_005":
-      gameData.currentTrial = "trial_006";
-      return gameData.currentTrial;
-      break;
-    case "trial_006":
-      gameData.currentTrial = "trial_007";
-      return gameData.currentTrial;
-      break;
-    case "trial_007":
-      gameData.currentTrial = "trial_008";
-      return gameData.currentTrial;
-      break;
-    case "trial_008":
-      gameData.currentTrial = "trial_009";
-      return gameData.currentTrial;
-      break;
-    case "trial_009":
-      gameData.currentTrial = null;
-      return null;
-      break;
+    for (i = 0; i < (length-1); ++i) {
+      
+      if(gameData.currentTrial === gameData.trials[i]) {
+        result = gameData.trials[i+1];
+      }
     }
 
-    return "trial_000";
+    return result;
   };
+
+
 
   //////////////////////////////////////////////////////////////
   ////////// **** End game developer functions **** ////////////

@@ -24,13 +24,17 @@ function buildGameConfig(/*mainScope*/) {
       },
       circle: {
         x: stageWidth * 0.5 + 50,
+      },
+      imgMessage: {
+        src: "enter"
       }
     }),
     preload: JSON.stringify({
       background: "img/background.png",
       circle: "img/circle.png",
       arrow: "img/arrow.png",
-      line: "img/line.png"
+      line: "img/line.png",
+      enter: "img/enter.jpg"
     })
   };
 }

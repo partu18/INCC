@@ -75,7 +75,7 @@ function buildObjectManifest(scope) {
         scaleY: 0.5
       }
     },
-    coverMessage: {
+    message: {
       constructor: Text,
       zIndex: 2,
       addToStage: true,
@@ -92,11 +92,21 @@ function buildObjectManifest(scope) {
         }
       }
     },
+    imgMessage: {
+      constructor: Shape,
+      addToStage: true,
+      zIndex: 2,
+      parameters: {
+        scaleX: 0.5,
+        scaleY: 0.5,
+        x: 50,
+        y: 300
+      }
+    },
     events: {
       constructor: EventsHandler,
       addToStage: false,
       parameters: {
-
       }
     }
   };
