@@ -1,8 +1,8 @@
 "use strict";
 /*global gameInit, buildObjects, MateMarote, Progress, addAllToSubStage */
 /*global STATUS, gameObjects, stage, $, window */
-/*exported instructionsMessage, coverMessage */
 /*global instructionsMessage, finishTrial, coverMessage */
+/*exported instructionsMessage, coverMessage */
 (function () {
   var currentConfig;
   var objectsManifest;
@@ -164,6 +164,38 @@
   //////////////////////////////////////////////////////////////
   //////////// **** Game developer functions **** //////////////
   //////////////////////////////////////////////////////////////
+
+  function saveMetric(metric,id){
+
+    var doneFunction = function (data, textStatus) {
+      console.log("Status: " + textStatus);
+      console.log("Result: " + data);
+    };
+
+    var failFunction = function (jqXHR, textStatus, errorThrown) {
+      console.log("Status: " + textStatus);
+      console.log("Error: " + errorThrown);
+    };
+
+    // pasando a string.
+    var stringMetrics = JSON.stringify(metric);
+
+    // armando data
+    var data = "metrics=" + metrics + "&id=" + id;
+    // enviando request
+    var request = $.ajax({
+      type: "POST",
+      url: "../php/saveMetrics.php",
+      data: data
+    });
+
+    // handler function to sucess
+    request.done(doneFunction);
+    // handler function to fail
+    request.fail(failFunction);
+  }
+
+
 
   function coverMessage() {
 
