@@ -28,3 +28,8 @@ DUI_arrow_pos =  (2,0)
 
 #Enfasis order
 EO_circle_first = True
+
+
+#Epsilons
+EPSILON = 0.30
+MINI_EPSILON = 0.15

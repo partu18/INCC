@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 import pickle
 import os
-
-WINDOWS = [0.1, 0.9]
-
-
+from conf import * 
 
 def loadMetrics(filePath):
   if os.path.isfile(filePath) != True:
@@ -19,25 +16,31 @@ def addMetric(filePath, metric):
   with open(filePath, 'wb') as fileData:
   	pickle.dump(metric, fileData)
 
-def firstValidMesure(timeStamp, obtainedTime):
+def matchedMeasure(timeStamp, mes_times):
+  def inRange(a):
+    return (a <= timeStamp+EPSILON) and (a >= timeStamp-EPSILON)
 
-  obtainedTime.sort()
-  x = -1
-  for i in obtainedTime:
-    if i >= timeStamp + WINDOWS[1]:
-      break
-    else:
-      if i >= (timeStamp - WINDOWS[0]):
-        x = i
-        break
+  mes_times.sort()
 
-  return x
+  result = [t for _,t in mes_times if inRange(t)]
+
+  #Chequeamos que no haya mas de dos (y si hay dos menor al mini)
+  if len(result) == 1:
+    return result[0]
+  elif len(result) == 2: #Chequeamos que sean bieeeen cercanos
+    if abs(result[0]-result[1]) <= MINI_EPSILON:
+      return result[0]
+    else: #ERROR
+      return float('NaN')
+  else: #ERROR
+    return float('NaN')
+  
 
 def cleanSequence(stimTimes, obtainedTime):
   result = []
 
   for i in stimTimes:
-    result.append(firstValidMesure(i, obtainedTime))
+    result.append(matchedMeasure(i, obtainedTime))
 
   return result
 
@@ -50,6 +53,7 @@ def cleanMetric(metrics):
   hands = [rhMetrics, lhMetrics]
   
   for metr in hands:
+
 
     cleanObtainedTime = cleanSequence(metr["T"]["S"], metr["T"]["M"])
     metr["T"]["M"] = cleanObtainedTime
@@ -76,3 +80,5 @@ def cleanMetric(metrics):
     metr["DA"]["AM"] = cleanObtainedTime
 
   return metrics
+
+
