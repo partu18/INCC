@@ -2,7 +2,16 @@
 
 import os
 
-working_directory = os.getcwd()
+working_directory = os.path.dirname(os.path.abspath(__file__))
+
+
+
+#Hands, tasks, 
+
+HANDS = ['LH','RH']
+TASKS = ['T','A','D','DT','DA']
+OBJECTS = ['S','M']
+
 
 #data structure
 dual_tasks_TF = ["D", "DT", "DA"]
