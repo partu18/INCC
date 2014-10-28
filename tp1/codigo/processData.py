@@ -9,15 +9,6 @@ from saveData import *
 from constants import * 
 from math import sqrt	
 
-
-
-
-
-
-
-
-
-
 #Shared auxiliaries
 def getAllResultsFiles():
 	def getFilesFromDir(dirPath):
@@ -65,9 +56,6 @@ def saveFigure(figure, file_path, h, t, o):
 	os.chdir(user_graphics_path)
 	figure.savefig(name, dpi=100)
 
-
-
-
 def initMatrix():
 
 	files_path = getAllResultsFiles()
@@ -82,7 +70,7 @@ def initMatrix():
 			stim_times = data[h][t][o+'S']
 			mes_times = data[h][t][o+'M']
 	
-			person_id = f.split('/')				#['home','user',........'person_id.data']
+			person_id = f.split('/')						#['home','user',........'person_id.data']
 			person_id = person_id[len(person_id)-1]			#person_id.data
 			person_id = person_id.split('.')[0]  			#person_id
 
@@ -92,6 +80,52 @@ def initMatrix():
 
 	return matrix
 
+def matrixToCSV(matrix, writePath):
+
+	with open(writePath, 'wb') as fileData:
+		fileData.write("subject id;stim number;stim timeStamp;mesure timeStamp;diff time;hand;type;subtype\n")
+		for line in matrix:
+			toWrite = ""
+			for i in range(len(line)):
+				toWrite += str(line[i])
+				if i != (len(line)-1):
+					toWrite += ";"
+			toWrite += '\n'
+			fileData.write(toWrite)
+
+def filterData(matrix, filterFunc, dataIndex):
+
+	datos = filter(filterFunc,matrix)
+	datos = [line[dataIndex] for line in datos]
+
+	return datos
+
+def average(data):
+	assert(len(data) > 0)
+	return sum(data)/float(len(data))
+
+def varianza(data):
+	assert(len(data) > 0)
+	p = average(data)
+	return sum([(xi - p)**2 for xi in data])/float(len(data))
+
+def perBlocks(intervalSize):
+	matrix = initMatrix()
+	resultado = []
+	
+	for p in getAllDataPosibilities():
+		(h,t,o) = p
+		blocks = []
+
+		for i in range(80/intervalSize):
+			data = filterData(matrix, (lambda x: (x[4] < 0.3) and (x[1] in range(i*intervalSize,(i+1)*intervalSize)) and (x[5] == h) and (x[6] == t) and (x[7] == o) ), 4)
+			blocks.append(data)
+
+		averages = [ average(d) for d in blocks]
+		varianzas = [ varianza(d) for d in blocks]
+		resultado.append([average,varianza,p])
+	
+	return resultado
 
 # Processing functions
 def asd():
@@ -113,20 +147,6 @@ def asd():
 	plt.show()
 	#saveFigure(figure,f,h,t,o)
 	plt.gcf().clear()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def diffBtwTimes(stim_times,mes_times):
@@ -173,13 +193,6 @@ def stdDeviationAndAverage(ini,fin,diff_times):
  	std_dev = sqrt (sum(std_dev_factors) / float(len(std_dev_factors)))
 
  	return (avg,std_dev)	
-
-
-
-
-
-
-
 
 def plotter_for_each_subject():
 	files_path = getAllResultsFiles()
@@ -279,7 +292,6 @@ def histogram_for_all():
 	# saveFigure(figure,f,h,t,o)
 	# plt.gcf().clear()
 
-
 #Filtering Matrix
 def filterMatrix(cond, matrix):
 	result = []
@@ -295,12 +307,6 @@ def cumple(fila, cond):
 			if fila[i] not in cond[i]:
 				result = False
 	return result
-
-
-
- 	
-
-
 
 #EXAMPLES
 def plotterVertical(path,hand,task,dualPrefix=''):
@@ -326,9 +332,6 @@ def plotterVertical(path,hand,task,dualPrefix=''):
 	plt.plot(l1,result,'ro')
 	
 	plt.show()
-
-
-
 
 def plotterHorizontal(path,hand,task,dualPrefix=''):
 	data = loadMetrics('../resultados/'+path)
