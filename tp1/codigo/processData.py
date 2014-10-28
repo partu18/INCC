@@ -120,7 +120,6 @@ def initMatrix():
 				matrix.append([person_id,i,stim_times[i],mes_times[i],diff_times[i],h,t,o])
 
 	return matrix
-
 def matrixToCSV(matrix, writePath):
 
 	with open(writePath, 'wb') as fileData:
@@ -133,40 +132,48 @@ def matrixToCSV(matrix, writePath):
 					toWrite += ";"
 			toWrite += '\n'
 			fileData.write(toWrite)
-
 def filterData(matrix, filterFunc, dataIndex):
 
 	datos = filter(filterFunc,matrix)
 	datos = [line[dataIndex] for line in datos]
 
 	return datos
-
 def average(data):
-	assert(len(data) > 0)
-	return sum(data)/float(len(data))
-
-def varianza(data):
-	assert(len(data) > 0)
-	p = average(data)
-	return sum([(xi - p)**2 for xi in data])/float(len(data))
-
-def perBlocks(intervalSize):
+	if len(data) > 0:
+		return sum(data)/float(len(data))
+	else:
+		return float('NaN')
+def variance(data):
+	if len(data) > 0:
+		p = average(data)
+		return sum([(xi - p)**2 for xi in data])/float(len(data))
+	else:
+		return float('NaN')
+def resultPerBlocks(intervalSize):
 	matrix = initMatrix()
-	resultado = []
+	result = []
 	
 	for p in getAllDataPosibilities():
 		(h,t,o) = p
 		blocks = []
 
-		for i in range(80/intervalSize):
+		for i in range(50/intervalSize):
 			data = filterData(matrix, (lambda x: (x[4] < 0.3) and (x[1] in range(i*intervalSize,(i+1)*intervalSize)) and (x[5] == h) and (x[6] == t) and (x[7] == o) ), 4)
 			blocks.append(data)
 
 		averages = [ average(d) for d in blocks]
-		varianzas = [ varianza(d) for d in blocks]
-		resultado.append([average,varianza,p])
+		variances = [ variance(d) for d in blocks]
+		result.append([averages,variances,p])
 	
-	return resultado
+	return result
+def plotAllPosibilitiesPerBlocks(intervalSize):
+
+	for data in resultPerBlocks(intervalSize):
+		(h,t,o) = data[2]
+		plotme([data[0]],[h+"-"+t+"-"+o],xlabelName=str(intervalSize) + "stims size blocks", ylabelName="block average", title="average-"+h+"-"+t+"-"+o)
+		plotme([data[1]],[h+"-"+t+"-"+o],xlabelName=str(intervalSize) + "stims size blocks", ylabelName="block variance", title="variance-"+h+"-"+t+"-"+o)
+
+
 
 # Processing functions
 def asd():
