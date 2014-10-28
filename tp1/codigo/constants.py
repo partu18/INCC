@@ -18,6 +18,7 @@ dual_tasks_TF = ["D", "DT", "DA"]
 dual_tasks_AF = ["D", "DA", "DT"]
 
 #Images path's:
+graphics_path = working_directory + '/../graficos/' 
 result_path = working_directory + '/../resultados/{}.data'
 circle_image_path = working_directory+'/../imagenes/circle.png'
 arrow_image_path = working_directory+'/../imagenes/arrow.png'
