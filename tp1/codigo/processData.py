@@ -3,11 +3,54 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 from os import listdir
 from os.path import isfile, join
 from saveData import *
 from constants import * 
 from math import sqrt	
+from numpy.random import normal,uniform
+
+
+
+#Plotting functions
+def plotme(data,legend,wantHistogram=False, xlabelName='X axis', ylabelName='Y axis', title='TITLE'):
+	'''
+	data --> List of vectors that we want to plot
+	legend --> Some name for each of the drawn functions
+	wantHistogram --> If true, will plot a histogram
+	xlabelName, ylabelName --> Names for axis
+	title --> title of the graphic (it will also be the name of the archive)
+	'''
+	assert(len(data) == len(legend))
+	bins_width=10
+	transparency = 0.3
+
+	#Plot each data 
+	for i in range(len(data)):
+		if wantHistogram:
+			plt.hist(data[i], alpha=transparency, histtype= 'stepfilled', normed=True, bins=bins_width, label=legend[i])
+		else:
+			l1 = range(len(data[i]))
+			plt.plot(l1,data[i],label = legend[i])
+		transparency += 0.2
+
+
+	#Settings 
+	plt.title(title)
+	plt.xlabel(xlabelName)
+	plt.ylabel(ylabelName)
+	plt.legend()
+
+	#Saving Image
+	figure = plt.gcf()
+	figure.savefig(graphics_path+title, dpi=200)
+	plt.gcf().clear()
+
+
+
+
+
 
 #Shared auxiliaries
 def getAllResultsFiles():
@@ -23,7 +66,6 @@ def getAllResultsFiles():
 	results_path = '/'.join(results_path) # /home/user/......../tp1/resultados
 
 	return getFilesFromDir(results_path)
-
 def getAllDataPosibilities():
 	result = []
 	for hand in HANDS:
@@ -35,7 +77,6 @@ def getAllDataPosibilities():
 					obj = obj.replace('A','T')
 				result.append((hand,task,obj))
 	return result
-
 def saveFigure(figure, file_path, h, t, o):
 	#Saving plot	
 	person_id = file_path.split('/')					#['home','user',........'person_id.data']
@@ -149,6 +190,7 @@ def asd():
 	plt.gcf().clear()
 
 
+
 def diffBtwTimes(stim_times,mes_times):
 	assert(len(stim_times) == len(mes_times))
 	result = []
@@ -193,6 +235,7 @@ def stdDeviationAndAverage(ini,fin,diff_times):
  	std_dev = sqrt (sum(std_dev_factors) / float(len(std_dev_factors)))
 
  	return (avg,std_dev)	
+
 
 def plotter_for_each_subject():
 	files_path = getAllResultsFiles()
