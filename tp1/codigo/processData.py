@@ -18,7 +18,7 @@ def plotme(data,legend,grid=False,
 					   logScale=False,
 					   linestyle='',
 					   bins_width=10,
-					   text_at_pos=('',(0,0),(1,1),10),
+					   text_at_pos=[],
 					   wantHistogram=False,
 					   xlabelName='X axis',
 					   ylabelName='Y axis',
@@ -30,15 +30,15 @@ def plotme(data,legend,grid=False,
 	legend --> List of names for each vector we want to plot
 	logScale --> log_10(i) where i is each element of the array of arrays.
 
-	linestyle -->  'o' => Puntos
-					'--' => Linea Rayada
-					por defecto => Linea comun
+	linestyle -->  'o' => dots
+					'--' => stopped line "----------"
+					Default => Common line
 
 					others : ['-'  | '-.' | ':' | 'None' | ' ' | '']
 
 	bins_width --> Width of the histogram "rectangles"
-	text_at_pos --> IF you want to attach text in some (x,y) position. If you recieve a (text,(x,y),(w,z),FZ) will draw an arrow
-					starting in (w,z) (where the text with FZ of fontsize will be) and pointing to (x,y) .
+	text_at_pos --> For  attaching text in some (x,y) positions.THe structure is a List of (text,(x,y),(w,z),FZ). Each of this ones will draw
+				 an arrow starting in (w,z) (where the text with FZ of fontsize will be) and pointing to (x,y) . Default is No text
 	wantHistogram --> If true, will plot a histogram
 	xlabelName, ylabelName --> Names for axis
 	title --> title of the graphic (it will also be the name of the archive)
@@ -66,13 +66,15 @@ def plotme(data,legend,grid=False,
 
 
 	#Settings 
-	text,(pos_xA,pos_yA),(pos_xT,pos_yT),fz = text_at_pos
+	for struct in text_at_pos:
+		text,(pos_xA,pos_yA),(pos_xT,pos_yT),fz = struct
+		plt.annotate(text,fontsize=fz, family='serif', xy=(pos_xA, pos_yA), xytext=(pos_xT, pos_yT),arrowprops=dict(facecolor='black', shrink=0.001))           
+
 
 	plt.title(title)
 	plt.xlabel(xlabelName)
 	plt.ylabel(ylabelName)
 	plt.grid(grid)
-	plt.annotate(text,fontsize=fz, family='serif', xy=(pos_xA, pos_yA), xytext=(pos_xT, pos_yT),arrowprops=dict(facecolor='black', shrink=0.001))           
 	plt.legend()
 
 	
