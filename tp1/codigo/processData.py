@@ -8,43 +8,79 @@ from os import listdir
 from os.path import isfile, join
 from saveData import *
 from constants import * 
-from math import sqrt	
+from math import sqrt,log
 from numpy.random import normal,uniform
 
 
 
 #Plotting functions
-def plotme(data,legend,wantHistogram=False, xlabelName='X axis', ylabelName='Y axis', title='TITLE'):
+def plotme(data,legend,grid=False,
+					   logScale=False,
+					   linestyle='',
+					   bins_width=10,
+					   text_at_pos=[],
+					   wantHistogram=False,
+					   xlabelName='X axis',
+					   ylabelName='Y axis',
+					   title='TITLE',
+					   quality=200):
+
 	'''
 	data --> List of vectors that we want to plot
-	legend --> Some name for each of the drawn functions
+	legend --> List of names for each vector we want to plot
+	logScale --> log_10(i) where i is each element of the array of arrays.
+
+	linestyle -->  'o' => dots
+					'--' => stopped line "----------"
+					Default => Common line
+
+					others : ['-'  | '-.' | ':' | 'None' | ' ' | '']
+
+	bins_width --> Width of the histogram "rectangles"
+	text_at_pos --> For  attaching text in some (x,y) positions.THe structure is a List of (text,(x,y),(w,z),FZ). Each of this ones will draw
+				 an arrow starting in (w,z) (where the text with FZ of fontsize will be) and pointing to (x,y) . Default is No text
 	wantHistogram --> If true, will plot a histogram
 	xlabelName, ylabelName --> Names for axis
 	title --> title of the graphic (it will also be the name of the archive)
+	quality --> in DPI's
 	'''
 	assert(len(data) == len(legend))
-	bins_width=10
 	transparency = 0.3
 
 	#Plot each data 
 	for i in range(len(data)):
+		current_data = data[i]
+
+		#If wanted logScale
+		if logScale:
+			current_data = [log(current_data[j],10) for j in range(len(current_data))] #log en base 10
+
+		#If you want Histogram a plot
 		if wantHistogram:
-			plt.hist(data[i], alpha=transparency, histtype= 'stepfilled', normed=True, bins=bins_width, label=legend[i])
+			plt.hist(current_data, alpha=transparency, histtype= 'stepfilled', normed=True, bins=bins_width, label=legend[i])
+		
 		else:
-			l1 = range(len(data[i]))
-			plt.plot(l1,data[i],label = legend[i])
+			l1 = range(len(current_data))
+			plt.plot(l1,current_data,linestyle,label = legend[i])
 		transparency += 0.2
 
 
 	#Settings 
+	for struct in text_at_pos:
+		text,(pos_xA,pos_yA),(pos_xT,pos_yT),fz = struct
+		plt.annotate(text,fontsize=fz, family='serif', xy=(pos_xA, pos_yA), xytext=(pos_xT, pos_yT),arrowprops=dict(facecolor='black', shrink=0.001))           
+
+
 	plt.title(title)
 	plt.xlabel(xlabelName)
 	plt.ylabel(ylabelName)
+	plt.grid(grid)
 	plt.legend()
 
+	
 	#Saving Image
 	figure = plt.gcf()
-	figure.savefig(graphics_path+title, dpi=200)
+	figure.savefig(graphics_path+title, dpi=quality)
 	plt.gcf().clear()
 
 
